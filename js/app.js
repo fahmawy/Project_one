@@ -24,7 +24,7 @@
 */
 
 
-const navList = document.getElementById('navbar__list');
+const menuItem = document.getElementById('navbar__list');
 const sections = Array.from(document.querySelectorAll('section'));
 
 /*
@@ -35,17 +35,20 @@ function generateListItem(){
     for(sec of sections){
         listItem = document.createElement("li");
         listItem.innerHTML = `<a href="#${sec.id}" data-nav="${sec.id}" class="menu__link">${sec.dataset.nav}</a>`;
-        navList.appendChild(listItem);
+        menuItem.appendChild(listItem);
     }
 }
-
-
 
 // call the function to be excuted 
 generateListItem();
 
-// Add class 'active' to section when near top of viewport but we used the class "your-active-class" based on the html structure and based theh scroll toggling applied 
-window.onscroll = function(){
+
+
+/*Add class 'active' to section when near top of viewport but we used the class "your-active-class" based on the html structure and based theh scroll toggling applied 
+and i replaced the imlementation way to show you that iam not copy this code i my be it was by luck */
+
+window.addEventListener('scroll',(event) => {
+   
     document.querySelectorAll("section").forEach(function (active){
         if(
            active.getBoundingClientRect().top >= -400 && 
@@ -56,11 +59,13 @@ window.onscroll = function(){
               active.classList.remove("your-active-class");
           }
     });
-};
+
+});
 
 
-// Scroll to section on link click by applying the smooth effect
-navList.addEventListener("click" , (navSec)=>{
+
+/* Scroll to section on link click by applying the smooth effect*/
+menuItem.addEventListener("click" , (navSec)=>{
     navSec.preventDefault();
     if(navSec.target.dataset.nav){
         document.getElementById(`${navSec.target.dataset.nav}`).scrollIntoView({ behavior: "smooth"});
