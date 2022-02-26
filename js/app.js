@@ -27,21 +27,14 @@
 const menuItem = document.getElementById('navbar__list');
 const sections = Array.from(document.querySelectorAll('section'));
 
-/*
-This is function to gnerate the menu by append the li inside the empty navigation and make set the link name 
-from the data-nav attribute 
-*/
-function generateListItem(){
-    for(sec of sections){
-        listItem = document.createElement("li");
-        listItem.innerHTML = `<a href="#${sec.id}" data-nav="${sec.id}" class="menu__link">${sec.dataset.nav}</a>`;
-        menuItem.appendChild(listItem);
-    }
-}
 
-// call the function to be excuted 
-generateListItem();
+sections.forEach((section)=>{
 
+    listItem = document.createElement("li");
+    listItem.innerHTML = `<a href="#${section.id}" data-nav="${section.id}" class="menu__link">${section.dataset.nav}</a>`;
+    menuItem.appendChild(listItem);
+
+});
 
 
 /*Add class 'active' to section when near top of viewport but we used the class "your-active-class" based on the html structure and based theh scroll toggling applied 
@@ -63,21 +56,22 @@ window.addEventListener('scroll',(event) => {
 });
 
 
-
-/* Scroll to section on link click by applying the smooth effect*/
-menuItem.addEventListener("click" , (navSec)=>{
-    navSec.preventDefault();
-    if(navSec.target.dataset.nav){
-        document.getElementById(`${navSec.target.dataset.nav}`).scrollIntoView({ behavior: "smooth"});
-        setTimeout(()=>{
-            location.hash = `${navSec.target.dataset.nav}`;
-        },170);
-    }
-});
-
-
-
-
+// /* Scroll to section on link click by applying the smooth effect*/
+const links = document.querySelectorAll(".navbar__menu ul li a");
+for (const link of links) {
+  link.addEventListener("click", navigateNow);
+}
+ 
+function navigateNow(e) {
+  e.preventDefault();
+  const href = this.getAttribute("href");
+  const offsetTop = document.querySelector(href).offsetTop;
+ 
+  scroll({
+    top: offsetTop,
+    behavior: "smooth"
+  });
+}
 
 
 
