@@ -1,84 +1,41 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
-
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
-
-/**
- * Define Global Variables
- * 
-*/
 
 
-const menuItem = document.getElementById('navbar__list');
-const sections = Array.from(document.querySelectorAll('section'));
+//get Sections and get the main id of menu to use it for append li items 
+const sections = document.querySelectorAll('section');
+const main_menu = document.getElementById('navbar__list');
 
+function build_menu() {
 
-sections.forEach((section)=>{
+  //here i do the loop on each section that i get  to get details to build the menu 
+  sections.forEach(function (section) {
+    var item = document.createElement('li');
+    item.innerHTML = '<a  href="#' + section.id + '" data-nav="' + section.id + '" class="menu__link">' + section.dataset.nav + '</a>';
+    main_menu.appendChild(item) // add the item
 
-    listItem = document.createElement("li");
-    listItem.innerHTML = `<a href="#${section.id}" data-nav="${section.id}" class="menu__link">${section.dataset.nav}</a>`;
-    menuItem.appendChild(listItem);
-
-});
-
-
-/*Add class 'active' to section when near top of viewport but we used the class "your-active-class" based on the html structure and based theh scroll toggling applied 
-and i replaced the imlementation way to show you that iam not copy this code i my be it was by luck */
-
-window.addEventListener('scroll',(event) => {
-   
-    document.querySelectorAll("section").forEach(function (active){
-        if(
-           active.getBoundingClientRect().top >= -400 && 
-           active.getBoundingClientRect().top <= 150  
-          ){
-              active.classList.add("your-active-class");
-          }else{
-              active.classList.remove("your-active-class");
-          }
-    });
-
-});
-
-
-// /* Scroll to section on link click by applying the smooth effect*/
-const links = document.querySelectorAll(".navbar__menu ul li a");
-for (const link of links) {
-  link.addEventListener("click", navigateNow);
-}
- 
-function navigateNow(e) {
-  e.preventDefault();
-  const href = this.getAttribute("href");
-  const offsetTop = document.querySelector(href).offsetTop;
- 
-  scroll({
-    top: offsetTop,
-    behavior: "smooth"
   });
+
 }
 
+build_menu() //call the function to get all sections;
+
+
+//apply smoth Scroll by adding option to the whole HTML so it reduce the code lines  and works like charm <3 
+document.getElementsByTagName('html')[0].style.scrollBehavior = 'smooth'
 
 
 
+//window.addEventListener for tracking the viewport and know which section is current now to activate the your-active-class  
+window.addEventListener('scroll', () => {
 
+  sections.forEach(function (section) {
+    var current_item_pos = section.getBoundingClientRect();
+    console.log(current_item_pos.top);
+    if (current_item_pos.top >= -500 && current_item_pos.top <= 160) {
+      section.classList.add('your-active-class');
+    } else {
+      section.classList.remove('your-active-class');
+    }
 
+  });
 
-
-
-
+})

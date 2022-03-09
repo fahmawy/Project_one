@@ -15,8 +15,9 @@ i started wirh defining that main variables as constant for the menu :
 
 ## functions
 
-1 - generateListItem() : This is function to gnerate the menu by append the li inside the empty navigationand make set the link name from the data-nav attribute  
+1 - build_menu() : This is function to gnerate the menu by append the li inside the empty navigation and make set the link name from the data-nav attribute  with concatination to add variables
 
-2 - window.onscroll : to making toggling by scroll between section 
+2 - Scroll Smoth using scroll behavior
+Refrence : https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
 
-3 - navList.addEventListener : to be able to make smooth scroll on click on the section link on the nav
+3- window.addEventListener for tracking the viewport and know which section is current now to activate the your-active-class 
