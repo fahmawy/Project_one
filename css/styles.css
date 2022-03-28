@@ -95,6 +95,7 @@ section {
     top: 0;
     width: 100%;
     z-index: 5;
+    height: 60px;
 }
 
 /* Footer Styles */
@@ -220,4 +221,54 @@ section.your-active-class .landing__container::after {
 		           translate(-1em) 
 		           rotate(-360deg);
 	}
+}
+
+
+a.box {
+    background: #ffffff00;
+    display: block;
+}
+.mobile_menu a span {
+    width: 30px;
+    height: 4px;
+    background: #535353;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.mobile_menu {
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    display: none;
+}
+
+.navbar__menu{
+    position: relative;
+}
+
+/* Responsive Requirments*/
+@media screen and (max-width:600px){
+    
+    #navbar__list li{
+        display: none;
+    }
+    
+    .mobile_menu {
+        display: block;
+    }
+
+    .res_menu li {
+        float: none;
+        display: block !important;
+        position: relative;
+        top: 45px;
+        background: #292929;
+        width: 100%;
+        text-align: left;
+    }
+    .res_menu li a{
+        color:white !important;
+    }
+
 }
